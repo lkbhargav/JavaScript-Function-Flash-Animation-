@@ -1,0 +1,247 @@
+<html>
+    <head>
+        <title> Flash Test Page </title>
+        <link rel="icon" href="images/flash0050.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="ajax_file.js" type="text/javascript"></script>
+        
+        <style>
+            .fwh{
+                display:block;
+                height:1000px;
+            }
+            
+            #tet{
+                font-family:monospace;
+                font-size: 20;
+                color:aliceblue;
+                background-color: black;
+            }
+            
+            .sopa{
+                font-size: 30;
+                font-family:cursive;
+                font-weight: bolder;
+                background-color:yellow;
+            }
+            
+        </style>
+        
+        <script type="text/javascript" src = "flashImage.js">  </script>
+        
+        <script type="text/javascript">  
+        
+            function userChoice() {
+                event.preventDefault();
+                frameRate = parseInt(document.thisform.fra.value);
+                extension = document.thisform.fty.value;
+                idName = document.thisform.iti.value;
+                reverseAnimationSpeed = document.thisform.ras.value;
+                defImage = parseInt(document.thisform.dim.value);
+                totalImages = parseInt(document.thisform.tim.value);
+                imagesPath = document.thisform.pin.value;
+                loopTimes = parseInt(document.thisform.nol.value);
+                
+                e = document.getElementById("loo").value;
+                
+                loop = (e === "true");
+                
+                f = document.getElementById("rlo").value;
+                
+                restartLoop = (f === "true");
+                
+                g = document.getElementById("rea").value;
+                
+                reverseAnimation = (g === "true");
+                
+                if(defImage == null)
+                    defImage = undefined;
+                
+                fi.resetAnim();
+                
+                fi = new flashImage(totalImages, frameRate, imagesPath, extension, idName, loop, restartLoop, loopTimes, reverseAnimationSpeed, reverseAnimation, defImage);
+                
+                fi.preload();
+            }
+            
+            function selection() {
+                event.preventDefault();
+                userSelection = document.getElementById("one").value;
+                if(userSelection === "one") {
+                    document.getElementById("demo").src = "one/one0051.jpg";
+                    
+                    totalImages = 50;
+                    frameRate = 24;
+                    imagesPath = "one/one";
+                    extension = ".jpg";
+                    idName = "demo";
+                    loop = false;
+                    restartLoop = false;
+                    defImage = 51;
+                    reverseAnimationSpeed = 6;
+                    reverseAnimation = false;
+                    loopTimes = -1;
+                } else {
+                    document.getElementById("demo").src = "images/flash0050.jpg";
+                    
+                    totalImages = 100;
+                    frameRate = 24;
+                    imagesPath = "images/flash";
+                    extension = ".jpg";
+                    idName = "demo";
+                    loop = false;
+                    restartLoop = false;
+                    defImage = 50;
+                    reverseAnimationSpeed = 6;
+                    reverseAnimation = false;
+                    loopTimes = 0;
+                }
+                
+                
+                document.getElementById("demo").setAttribute('onclick','fi.flashTest()'); 
+                document.getElementById("reset").disabled = false;
+                
+                document.getElementById("tim").value = totalImages;
+                document.getElementById("fra").value = frameRate;
+                document.getElementById("pin").value = imagesPath;
+                document.getElementById("fty").value = extension;
+                document.getElementById("iti").value = idName;
+                document.getElementById("loo").selected = "False";
+                document.getElementById("rlo").selected = "False";
+                document.getElementById("nol").value = loopTimes;
+                document.getElementById("ras").value = reverseAnimationSpeed;
+                document.getElementById("rea").selected = "True";
+                document.getElementById("dim").value = defImage;
+                
+                fi = new flashImage(totalImages, frameRate, imagesPath, extension, idName, loop, restartLoop, loopTimes, reverseAnimationSpeed, reverseAnimation, defImage);
+                
+                fi.preload();
+            }
+        </script>
+        
+    </head>
+    
+    <body onload="process()">
+        <div class="container">
+        <center>
+        <div class="row row-content">
+            <h1> Flash Animation for Webpage (Support for all platforms) </h2> <br>
+            <p id="tet"> This is for people who want to use animations in their <i>websites</i> (for headings or any fancy stuff), usually we can use the <i>.swf movie file</i> that works great, but that is limited to desktops and laptops only, since flash is not supported on smartphones (iOS, Android, etc). That makes your website on smartphone look ugly with a missing plugin error, henceforth to overcome that problem, I have created a possible solution. </p>
+            
+            <p id="tet"> First of all, you should have a working flash movie of any length, at the same time it should be just animation, I mean to say it should'nt be interactive with buttons and music, since this tutorial is limited to <i>plain animations</i>. Once the flash movie is ready, you should convert the entire movie to a <i>.jpg or .png sequence of images</i>, you can get the sequence of images by exporting the movie in one of those formats. The main idea behind this is to change 24 images (any number) per second to get the animation effect. My work will make it easy for you to get the animations working real quick on your webpage. Anyways you should use the library or javascript file provided in this page to get it working. </p>
+            
+            <p id="tet"> Once you download the javascript file, make it available in you project directory along with the image sequence generated. Now include the  javascript file into your project (specific html page), using the <i>script tag</i> and then follow the steps below.</p>
+            
+            
+            <br>
+            <br>
+            <div class="row row-content">
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+            <form role="form">
+            <div class="form-group">
+                <label> Choose an animation: </label>
+                <select class="form-control" id="one"> 
+                    <option value="flash"> Nature Animation </option>
+                    <option value="one"> One Animation </option>
+                </select>
+            </div>
+                
+            <input type="submit" value="Select" onclick="selection()" class="btn btn-default">
+                
+            </form>
+                </div>
+            </div>
+            
+            <img align="center" class="img-responsive" id="demo" src="" onclick="" alt = "Select an animation from the dropdown above">
+        </div>
+            <input type="submit" class="btn btn-danger" value="Reset Animation" name="reset" id="reset" onclick="fi.resetAnim()" disabled> 
+        </center>
+            <br> <br>
+        <div class="row row-content">
+            
+            <center> <span class="sopa"> Control Panel </span> </center>
+            
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <form role="form" name="thisform" onsubmit="userChoice()"> 
+                <div class="form-group">
+                    <label> Total Images: </label>
+                    <input class="form-control" type="number" id="tim" name="tim" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label> Frame Rate: </label>
+                    <input class="form-control" type="number" id="fra" name="fra" required>
+                </div>
+                
+                <div class="form-group">
+                    <label> Path/Image Name: </label>
+                    <input class="form-control" type="text" id="pin" name="pin" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label> File Type (default = .jpg): </label>
+                    <input class="form-control" type="text" id="fty" name="fty" required>
+                </div>
+                
+                <div class="form-group">
+                    <label> Image Tag ID (default = demo): </label>
+                    <input class="form-control" type="text" id="iti" name="iti" required>
+                </div>
+                
+                <div class="form-group">
+                    <label> Loop: </label>
+                    <select id="loo" div="loo" name="loo" class="form-control">
+                        <option value="true">True</option>
+                        <option value="false" selected>False</option>
+                    </select>
+                </div>
+                    
+                <div class="form-group">
+                    <label> Number of loops (0 or less anything less for unlimited): </label>
+                    <input type="number" class="form-control" id="nol" name="nol">
+                </div>
+                
+                <div class="form-group">
+                    <label> Restart Loop: </label>
+                    <select id="rlo" div="rlo" name="rlo" class="form-control">
+                        <option value="true">True</option>
+                        <option value="false" selected>False</option>
+                    </select>
+                </div>
+                    
+                <div class="form-group">
+                    <label> Reverse Animation (works after normal anim, this works only when loop is true): </label>
+                    <select id="rea" div="rea" name="rea" class="form-control">
+                        <option value="true">True</option>
+                        <option value="false" selected>False</option>
+                    </select>
+                </div>
+                    
+                <div class="form-group">
+                    <label> Reverse Animation Frame Rate: </label>
+                    <input type="number" class="form-control" id="ras" name="ras">
+                </div>
+                
+                <div class="form-group">
+                    <label> Default Image Number (Optional): </label>
+                    <input class="form-control" type="number" id="dim" name="dim">
+                </div>    
+                
+                    
+                <center>
+                    <input type="submit" class="btn btn-success" value="Save Configuration" name="submit"> 
+                </center>
+                    <br>
+            </form>
+            </div>    
+        </div>
+        </div>
+        
+        <script>
+            
+        </script>
+    </body>
+</html>
