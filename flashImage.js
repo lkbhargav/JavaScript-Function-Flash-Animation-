@@ -1,6 +1,8 @@
-function flashImage(totImages, speed, imgName, imgFormat, imageId, loop, prestart, loopTimes, reverseSpeed, reverseAnim, defImage)
+function flashImage(totImages, speed, imgName, imgFormat, imageId, playForever, loop, prestart, loopTimes, reverseSpeed, reverseAnim, defImage)
 {
     this.num = totImages;
+    
+    var fnum = totImages;
     
     var n = this.num;
     
@@ -9,6 +11,8 @@ function flashImage(totImages, speed, imgName, imgFormat, imageId, loop, prestar
     this.ext = imgFormat;
     
     var idName = imageId;
+    
+    var playEver = playForever;
     
     var imgs = new Array();
     
@@ -46,6 +50,9 @@ function flashImage(totImages, speed, imgName, imgFormat, imageId, loop, prestar
     
     var flashMovie = undefined;
     
+    if (playEver)
+        playForever();
+    
     if(arguments[tna-1] >= 1 && arguments[tna-1] <= (this.num+1) && typeof arguments[tna-1] == "number") {
         distatus = true;
         defImg = arguments[tna-1];
@@ -73,6 +80,9 @@ function flashImage(totImages, speed, imgName, imgFormat, imageId, loop, prestar
             
     this.flashTest = function flashTest() {
         
+        
+        if(!playEver) {
+            
         // Counter to check user's choice
         if(!lstatus)
             counter++;
@@ -142,9 +152,21 @@ function flashImage(totImages, speed, imgName, imgFormat, imageId, loop, prestar
             if(distatus)
                 document.getElementById(idName).src = imgs[defImg].src;
         }
+        }
     }
     
     this.resetAnim = function resetAnim() {
         clearInterval(flashMovie);
-    }       
+    }
+    
+    function playForever() {
+        playEver = true;
+        flashMovie = setInterval(function() {
+                imgNum++;
+                if(imgNum == fnum)
+                    imgNum = 1;
+                
+                document.getElementById("demo").src = imgs[imgNum].src;   
+            }, perception);  
+    }
 }

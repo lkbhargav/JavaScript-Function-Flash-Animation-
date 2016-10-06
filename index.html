@@ -1,11 +1,13 @@
 <html>
     <head>
-        <title> Flash Test Page </title>
+        <title> Flash Library Demonstration Page </title>
         <link rel="icon" href="images/flash0050.jpg">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src = "https://dl.dropboxusercontent.com/u/77110529/Flash Library/flashImage_v_1_0.js"></script>
+        <script type="text/javascript" src="manage.js"></script>
         <script src="ajax_file.js" type="text/javascript"></script>
         
         <style>
@@ -29,99 +31,6 @@
             }
             
         </style>
-        
-        <script type="text/javascript" src = "flashImage.js">  </script>
-        
-        <script type="text/javascript">  
-        
-            function userChoice() {
-                event.preventDefault();
-                frameRate = parseInt(document.thisform.fra.value);
-                extension = document.thisform.fty.value;
-                idName = document.thisform.iti.value;
-                reverseAnimationSpeed = document.thisform.ras.value;
-                defImage = parseInt(document.thisform.dim.value);
-                totalImages = parseInt(document.thisform.tim.value);
-                imagesPath = document.thisform.pin.value;
-                loopTimes = parseInt(document.thisform.nol.value);
-                
-                e = document.getElementById("loo").value;
-                
-                loop = (e === "true");
-                
-                f = document.getElementById("rlo").value;
-                
-                restartLoop = (f === "true");
-                
-                g = document.getElementById("rea").value;
-                
-                reverseAnimation = (g === "true");
-                
-                if(defImage == null)
-                    defImage = undefined;
-                
-                fi.resetAnim();
-                
-                fi = new flashImage(totalImages, frameRate, imagesPath, extension, idName, loop, restartLoop, loopTimes, reverseAnimationSpeed, reverseAnimation, defImage);
-                
-                fi.preload();
-            }
-            
-            function selection() {
-                event.preventDefault();
-                userSelection = document.getElementById("one").value;
-                if(userSelection === "one") {
-                    document.getElementById("demo").src = "one/one0051.jpg";
-                    
-                    totalImages = 50;
-                    frameRate = 24;
-                    imagesPath = "one/one";
-                    extension = ".jpg";
-                    idName = "demo";
-                    loop = false;
-                    restartLoop = false;
-                    defImage = 51;
-                    reverseAnimationSpeed = 6;
-                    reverseAnimation = false;
-                    loopTimes = -1;
-                } else {
-                    document.getElementById("demo").src = "images/flash0050.jpg";
-                    
-                    totalImages = 100;
-                    frameRate = 24;
-                    imagesPath = "images/flash";
-                    extension = ".jpg";
-                    idName = "demo";
-                    loop = false;
-                    restartLoop = false;
-                    defImage = 50;
-                    reverseAnimationSpeed = 6;
-                    reverseAnimation = false;
-                    loopTimes = 0;
-                }
-                
-                
-                document.getElementById("demo").setAttribute('onclick','fi.flashTest()'); 
-                document.getElementById("reset").disabled = false;
-                
-                document.getElementById("tim").value = totalImages;
-                document.getElementById("fra").value = frameRate;
-                document.getElementById("pin").value = imagesPath;
-                document.getElementById("fty").value = extension;
-                document.getElementById("iti").value = idName;
-                document.getElementById("loo").selected = "False";
-                document.getElementById("rlo").selected = "False";
-                document.getElementById("nol").value = loopTimes;
-                document.getElementById("ras").value = reverseAnimationSpeed;
-                document.getElementById("rea").selected = "True";
-                document.getElementById("dim").value = defImage;
-                
-                fi = new flashImage(totalImages, frameRate, imagesPath, extension, idName, loop, restartLoop, loopTimes, reverseAnimationSpeed, reverseAnimation, defImage);
-                
-                fi.preload();
-            }
-        </script>
-        
     </head>
     
     <body onload="process()">
@@ -135,12 +44,13 @@
             
             <p id="tet"> Once you download the javascript file, make it available in you project directory along with the image sequence generated. Now include the  javascript file into your project (specific html page), using the <i>script tag</i> and then follow the steps below.</p>
             
+            <p id="tet">Stay Tuned, tutorial will be available pretty soon.</p>
             
             <br>
             <br>
             <div class="row row-content">
                 <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <form role="form">
+            <form role="form" onsubmit="false">
             <div class="form-group">
                 <label> Choose an animation: </label>
                 <select class="form-control" id="one"> 
@@ -149,7 +59,7 @@
                 </select>
             </div>
                 
-            <input type="submit" value="Select" onclick="selection()" class="btn btn-default">
+            <input type="submit" value="Select" onclick="javascript: return selection()" class="btn btn-default">
                 
             </form>
                 </div>
@@ -157,7 +67,7 @@
             
             <img align="center" class="img-responsive" id="demo" src="" onclick="" alt = "Select an animation from the dropdown above">
         </div>
-            <input type="submit" class="btn btn-danger" value="Reset Animation" name="reset" id="reset" onclick="fi.resetAnim()" disabled> 
+            <input type="submit" class="btn btn-danger" value="Reset Animation" name="reset" id="reset" onclick="javascript: return fi.resetAnim()" disabled> 
         </center>
             <br> <br>
         <div class="row row-content">
@@ -165,10 +75,10 @@
             <center> <span class="sopa"> Control Panel </span> </center>
             
             <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                <form role="form" name="thisform" onsubmit="userChoice()"> 
+                <form role="form" name="thisform" > 
                 <div class="form-group">
                     <label> Total Images: </label>
-                    <input class="form-control" type="number" id="tim" name="tim" disabled>
+                    <input class="form-control" type="number" id="tim" name="tim"  disabled>
                 </div>
                 
                 <div class="form-group">
@@ -232,7 +142,7 @@
                 
                     
                 <center>
-                    <input type="submit" class="btn btn-success" value="Save Configuration" name="submit"> 
+                    <input type="submit" class="btn btn-success" value="Save Configuration" name="submit" onclick="javascript: return userChoice()"> 
                 </center>
                     <br>
             </form>
